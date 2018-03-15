@@ -32,7 +32,7 @@ def linear_regression(lam, batch_size, learning_rate, num_batch, n_iter):
     y_model = tf.matmul(w, x, transpose_a=True) + b
 
     mse = 0.5 * tf.losses.mean_squared_error(y, y_model)
-    loss_function = lam/2 * tf.norm(w)
+    loss_function = lam * tf.nn.l2_loss(w)
     error = mse + loss_function
 
     train_op = tf.train.GradientDescentOptimizer(learning_rate).minimize(error)
